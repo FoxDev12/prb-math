@@ -41,6 +41,7 @@ import { SD59x18 } from "./ValueType.sol";
 ///
 /// @param x The SD59x18 number for which to calculate the absolute value.
 /// @param result The absolute value of x as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function abs(SD59x18 x) pure returns (SD59x18 result) {
     int256 xInt = unwrap(x);
     if (xInt == uMIN_SD59x18) {
@@ -53,6 +54,7 @@ function abs(SD59x18 x) pure returns (SD59x18 result) {
 /// @param x The first operand as an SD59x18 number.
 /// @param y The second operand as an SD59x18 number.
 /// @return result The arithmetic average as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function avg(SD59x18 x, SD59x18 y) pure returns (SD59x18 result) {
     int256 xInt = unwrap(x);
     int256 yInt = unwrap(y);
@@ -85,6 +87,7 @@ function avg(SD59x18 x, SD59x18 y) pure returns (SD59x18 result) {
 ///
 /// @param x The SD59x18 number to ceil.
 /// @param result The least number greater than or equal to x, as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function ceil(SD59x18 x) pure returns (SD59x18 result) {
     int256 xInt = unwrap(x);
     if (xInt > uMAX_WHOLE_SD59x18) {
@@ -123,6 +126,7 @@ function ceil(SD59x18 x) pure returns (SD59x18 result) {
 /// @param x The numerator as an SD59x18 number.
 /// @param y The denominator as an SD59x18 number.
 /// @param result The quotient as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function div(SD59x18 x, SD59x18 y) pure returns (SD59x18 result) {
     int256 xInt = unwrap(x);
     int256 yInt = unwrap(y);
@@ -171,6 +175,7 @@ function div(SD59x18 x, SD59x18 y) pure returns (SD59x18 result) {
 ///
 /// @param x The exponent as an SD59x18 number.
 /// @return result The result as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function exp(SD59x18 x) pure returns (SD59x18 result) {
     int256 xInt = unwrap(x);
     // Without this check, the value passed to `exp2` would be less than -59.794705707972522261.
@@ -209,6 +214,7 @@ function exp(SD59x18 x) pure returns (SD59x18 result) {
 ///
 /// @param x The exponent as an SD59x18 number.
 /// @return result The result as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function exp2(SD59x18 x) pure returns (SD59x18 result) {
     int256 xInt = unwrap(x);
     if (xInt < 0) {
@@ -247,6 +253,7 @@ function exp2(SD59x18 x) pure returns (SD59x18 result) {
 ///
 /// @param x The SD59x18 number to floor.
 /// @param result The greatest integer less than or equal to x, as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function floor(SD59x18 x) pure returns (SD59x18 result) {
     int256 xInt = unwrap(x);
     if (xInt < uMIN_WHOLE_SD59x18) {
@@ -286,6 +293,7 @@ function frac(SD59x18 x) pure returns (SD59x18 result) {
 /// @param x The first operand as an SD59x18 number.
 /// @param y The second operand as an SD59x18 number.
 /// @return result The result as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function gm(SD59x18 x, SD59x18 y) pure returns (SD59x18 result) {
     int256 xInt = unwrap(x);
     int256 yInt = unwrap(y);
@@ -319,6 +327,7 @@ function gm(SD59x18 x, SD59x18 y) pure returns (SD59x18 result) {
 ///
 /// @param x The SD59x18 number for which to calculate the inverse.
 /// @return result The inverse as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function inv(SD59x18 x) pure returns (SD59x18 result) {
     // 1e36 is UNIT * UNIT.
     result = wrap(1e36 / unwrap(x));
@@ -341,6 +350,7 @@ function inv(SD59x18 x) pure returns (SD59x18 result) {
 ///
 /// @param x The SD59x18 number for which to calculate the natural logarithm.
 /// @return result The natural logarithm as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function ln(SD59x18 x) pure returns (SD59x18 result) {
     // Do the fixed-point multiplication inline to save gas. This is overflow-safe because the maximum value that log2(x)
     // can return is 195.205294292027477728.
@@ -364,6 +374,7 @@ function ln(SD59x18 x) pure returns (SD59x18 result) {
 ///
 /// @param x The SD59x18 number for which to calculate the common logarithm.
 /// @return result The common logarithm as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function log10(SD59x18 x) pure returns (SD59x18 result) {
     int256 xInt = unwrap(x);
     if (xInt < 0) {
@@ -477,6 +488,7 @@ function log10(SD59x18 x) pure returns (SD59x18 result) {
 ///
 /// @param x The SD59x18 number for which to calculate the binary logarithm.
 /// @return result The binary logarithm as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function log2(SD59x18 x) pure returns (SD59x18 result) {
     int256 xInt = unwrap(x);
     if (xInt <= 0) {
@@ -549,6 +561,7 @@ function log2(SD59x18 x) pure returns (SD59x18 result) {
 /// @param x The multiplicand as an SD59x18 number.
 /// @param y The multiplier as an SD59x18 number.
 /// @return result The product as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function mul(SD59x18 x, SD59x18 y) pure returns (SD59x18 result) {
     int256 xInt = unwrap(x);
     int256 yInt = unwrap(y);
@@ -597,6 +610,7 @@ function mul(SD59x18 x, SD59x18 y) pure returns (SD59x18 result) {
 /// @param x Number to raise to given power y, as an SD59x18 number.
 /// @param y Exponent to raise x to, as an SD59x18 number
 /// @return result x raised to power y, as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function pow(SD59x18 x, SD59x18 y) pure returns (SD59x18 result) {
     int256 xInt = unwrap(x);
     int256 yInt = unwrap(y);
@@ -628,6 +642,7 @@ function pow(SD59x18 x, SD59x18 y) pure returns (SD59x18 result) {
 /// @param x The base as an SD59x18 number.
 /// @param y The exponent as an uint256.
 /// @return result The result as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function powu(SD59x18 x, uint256 y) pure returns (SD59x18 result) {
     uint256 xAbs = uint256(unwrap(abs(x)));
 
@@ -670,6 +685,7 @@ function powu(SD59x18 x, uint256 y) pure returns (SD59x18 result) {
 ///
 /// @param x The SD59x18 number for which to calculate the square root.
 /// @return result The result as an SD59x18 number.
+/// @custom:smtchecker abstract-function-nondet
 function sqrt(SD59x18 x) pure returns (SD59x18 result) {
     int256 xInt = unwrap(x);
     if (xInt < 0) {

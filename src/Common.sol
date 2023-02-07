@@ -66,6 +66,7 @@ uint256 constant UNIT_INVERSE = 781566461551748419797279945988162623061752125920
 ///
 /// @param x The uint256 number for which to find the index of the most significant bit.
 /// @return result The index of the most significant bit as an uint256.
+/// @custom:smtchecker abstract-function-nondet
 function msb(uint256 x) pure returns (uint256 result) {
     // 2^128
     assembly ("memory-safe") {
@@ -132,6 +133,7 @@ function msb(uint256 x) pure returns (uint256 result) {
 /// @param y The multiplier as an uint256.
 /// @param denominator The divisor as an uint256.
 /// @return result The result as an uint256.
+/// @custom:smtchecker abstract-function-nondet
 function mulDiv(uint256 x, uint256 y, uint256 denominator) pure returns (uint256 result) {
     // 512-bit multiply [prod1 prod0] = x * y. Compute the product mod 2^256 and mod 2^256 - 1, then use
     // use the Chinese Remainder Theorem to reconstruct the 512 bit result. The result is stored in two 256
@@ -230,6 +232,7 @@ function mulDiv(uint256 x, uint256 y, uint256 denominator) pure returns (uint256
 /// @param x The multiplicand as an unsigned 60.18-decimal fixed-point number.
 /// @param y The multiplier as an unsigned 60.18-decimal fixed-point number.
 /// @return result The result as an unsigned 60.18-decimal fixed-point number.
+/// @custom:smtchecker abstract-function-nondet
 function mulDiv18(uint256 x, uint256 y) pure returns (uint256 result) {
     uint256 prod0;
     uint256 prod1;
@@ -277,6 +280,7 @@ function mulDiv18(uint256 x, uint256 y) pure returns (uint256 result) {
 /// @param y The multiplier as an int256.
 /// @param denominator The divisor as an int256.
 /// @return result The result as an int256.
+/// @custom:smtchecker abstract-function-nondet
 function mulDivSigned(int256 x, int256 y, int256 denominator) pure returns (int256 result) {
     if (x == type(int256).min || y == type(int256).min || denominator == type(int256).min) {
         revert PRBMath_MulDivSigned_InputTooSmall();
@@ -322,6 +326,7 @@ function mulDivSigned(int256 x, int256 y, int256 denominator) pure returns (int2
 /// See https://ethereum.stackexchange.com/a/96594/24693.
 /// @param x The exponent as an unsigned 192.64-bit fixed-point number.
 /// @return result The result as an unsigned 60.18-decimal fixed-point number.
+/// @custom:smtchecker abstract-function-nondet
 function prbExp2(uint256 x) pure returns (uint256 result) {
     unchecked {
         // Start from 0.5 in the 192.64-bit fixed-point format.
@@ -567,6 +572,7 @@ function prbExp2(uint256 x) pure returns (uint256 result) {
 ///
 /// @param x The uint256 number for which to calculate the square root.
 /// @return result The result as an uint256.
+/// @custom:smtchecker abstract-function-nondet
 function prbSqrt(uint256 x) pure returns (uint256 result) {
     if (x == 0) {
         return 0;
