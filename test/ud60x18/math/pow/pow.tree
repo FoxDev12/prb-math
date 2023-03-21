@@ -6,8 +6,10 @@ pow.t.sol
 │     └── it should return zero
 └── when the base is not zero
    ├── when the base is less than one
-   │  └── it should revert
-   └── when the base is greater than or equal to one
+   │  └── it should return the correct value
+   ├── when the base is one
+   │  └── it should return one
+   └── when the base is greater than one
       ├── when the exponent is zero
       │  └── it should return one
       └── when the exponent is not zero

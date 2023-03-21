@@ -37,11 +37,19 @@ contract PowTest is UD60x18_Test {
         _;
     }
 
-    function test_RevertWhen_BaseLessThanOne() external baseNotZero {
-        UD60x18 x = ud(1e18 - 1);
-        UD60x18 y = PI;
-        vm.expectRevert(abi.encodeWithSelector(PRBMath_UD60x18_Log_InputTooSmall.selector, x));
-        pow(x, y);
+    function baseLessThanOneExponentNotZero_Sets() internal returns (Set[] memory) {
+        delete sets;
+        sets.push(set({ x: 2e17, y: 1.1e18, expected: 170267984504156922 }));
+        sets.push(set({ x: 1e16, y: E, expected: 3659622955309 }));
+        sets.push(set({ x: 1e15, y: PI, expected: 376029605 }));
+        sets.push(set({ x: 1.2409e17, y: 5.4092e15, expected: 988775828166284570 }));
+
+        return sets;
+    }
+
+    function test_Pow_BaseLessThanOne() external baseNotZero parameterizedTest(baseLessThanOneExponentNotZero_Sets()) {
+        UD60x18 actual = pow(s.x, s.y);
+        assertEq(actual, s.expected);
     }
 
     modifier baseGreaterThanOrEqualToOne() {

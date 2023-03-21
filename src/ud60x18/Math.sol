@@ -436,7 +436,11 @@ function mul(UD60x18 x, UD60x18 y) pure returns (UD60x18 result) {
 /// Notes:
 /// - All from {exp2}, {log2} and {mul}.
 /// - Assumes 0^0 is 1.
-///
+/// - {log2} is not defined for x < 1.
+/// - To circumvent this, we compute x^y for x = 1 by doing :
+/// $$
+/// x^y = 1 / {{1 / x}^y}
+/// $$
 /// @param x Number to raise to given power y, as an UD60x18 number.
 /// @param y Exponent to raise x to, as an UD60x18 number.
 /// @return result x raised to power y, as an UD60x18 number.
@@ -451,7 +455,16 @@ function pow(UD60x18 x, UD60x18 y) pure returns (UD60x18 result) {
         if (yUint == uUNIT) {
             result = x;
         } else {
-            result = exp2(mul(log2(x), y));
+            if (xUint > uUNIT) {
+                result = exp2(mul(log2(x), y));
+            } else if (xUint == uUNIT) {
+                result = UNIT;
+            } else {
+                // will overflow for very small x values
+                UD60x18 rX = div(UNIT, x);
+                UD60x18 rResult = exp2(mul(log2(rX), y));
+                result = div(UNIT, rResult);
+            }
         }
     }
 }
